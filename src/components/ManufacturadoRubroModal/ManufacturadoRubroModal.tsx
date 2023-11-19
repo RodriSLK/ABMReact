@@ -25,11 +25,19 @@ const rubroManufacturadoModal: React.FC<rubroManufacturadoModalProps> = ({
   onDelete,
   onSaveUpdate,
 }: rubroManufacturadoModalProps) => {
+
+  const validationSchema = Yup.object().shape({
+    idArticuloManufacturado: Yup.number().integer().min(0),
+    denominacionArticuloManufacturado: Yup.string().required('La denominación de insumo es requerida'),
+    denominacionRubroGeneral: Yup.string().required('La denominación de rubro es requerida'),
+    rubroEstado: Yup.string().required('El estado del rubro es requerido'),
+  });
+
   const handleSaveUpdate = async (rubro:  DTOManufacturadoRubro ) => {
     try {
       const isNew = rubro.idArticuloManufacturado=== 0;
       await onSaveUpdate(rubro);
-      toast.success(isNew ? 'Rubro de Insumo Creado' : 'Rubro de Insumo Actualizado', {
+      toast.success(isNew ? 'Rubro de Manufacturado Creado' : 'Rubro Manufacturado Actualizado', {
         position: 'top-center',
       });
       onHide();
@@ -42,7 +50,7 @@ const rubroManufacturadoModal: React.FC<rubroManufacturadoModalProps> = ({
     try {
       const isNew = rubroManufacturado.idArticuloManufacturado === 0;
       await onDelete(rubroManufacturado);
-      toast.success(isNew ? 'Rubro de Insumo creado' : 'Rubro de Insumo eliminado', {
+      toast.success(isNew ? 'Rubro Manufacturado Eliminado' : 'Rubro Manufacturado eliminado', {
         position: 'top-center',
       });
       onHide();
@@ -51,13 +59,7 @@ const rubroManufacturadoModal: React.FC<rubroManufacturadoModalProps> = ({
     }
   };
 
-  const validationSchema = Yup.object().shape({
-    id: Yup.number().integer().min(0),
-    insumoDenominacion: Yup.string().required('La denominación de insumo es requerida'),
-    rubroDenominacion: Yup.string().required('La denominación de rubro es requerida'),
-    rubroPadreDenominacion: Yup.string().required('La denominación del rubro padre es requerida'),
-    rubroEstado: Yup.string().required('El estado del rubro es requerido'),
-  });
+  
 
   const formik = useFormik({
     initialValues: rubroManufacturado,
@@ -77,7 +79,7 @@ const rubroManufacturadoModal: React.FC<rubroManufacturadoModalProps> = ({
           <Modal.Body>
             <p>
               ¿Está seguro que desea eliminar el Rubro de Insumo?
-              <br /> <strong>{rubroManufacturado. denominacionArticuloManufacturado}</strong>?
+              <br /> <strong>{rubroManufacturado.denominacionArticuloManufacturado}</strong>?
             </p>
           </Modal.Body>
           <Modal.Footer>
@@ -101,13 +103,13 @@ const rubroManufacturadoModal: React.FC<rubroManufacturadoModalProps> = ({
                 <Form.Control
                   name="denominacionArticuloManufacturado"
                   type="text"
-                  value={formik.values. denominacionArticuloManufacturado}
+                  value={formik.values.denominacionArticuloManufacturado}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  isInvalid={Boolean(formik.errors. denominacionArticuloManufacturado && formik.touched. denominacionArticuloManufacturado)}
+                  isInvalid={Boolean(formik.errors.denominacionArticuloManufacturado && formik.touched.denominacionArticuloManufacturado)}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {formik.errors. denominacionArticuloManufacturado}
+                  {formik.errors.denominacionArticuloManufacturado}
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -117,13 +119,13 @@ const rubroManufacturadoModal: React.FC<rubroManufacturadoModalProps> = ({
                 <Form.Control
                   name="denominacionRubroGeneral"
                   type="text"
-                  value={formik.values. denominacionRubroGeneral}
+                  value={formik.values.denominacionRubroGeneral}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  isInvalid={Boolean(formik.errors. denominacionRubroGeneral && formik.touched. denominacionRubroGeneral)}
+                  isInvalid={Boolean(formik.errors.denominacionRubroGeneral && formik.touched.denominacionRubroGeneral)}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {formik.errors. denominacionRubroGeneral}
+                  {formik.errors.denominacionRubroGeneral}
                 </Form.Control.Feedback>
               </Form.Group>
 

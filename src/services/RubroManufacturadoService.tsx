@@ -22,8 +22,8 @@ export const RubroManufacturadoService = {
     return data;
   },
 
-  updateRubroManufacturado: async ( id: number, articuloRubro: DTOManufacturadoRubro): Promise<DTOManufacturadoRubro> => {
-    const response = await fetch(`${BASE_URL}/manufacturadosConRubrosYEstados/${id}`, {
+  updateRubroManufacturado: async ( idArticuloManufacturado: number, articuloRubro: DTOManufacturadoRubro): Promise<DTOManufacturadoRubro> => {
+    const response = await fetch(`${BASE_URL}/manufacturadosConRubrosYEstados/${idArticuloManufacturado}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -34,9 +34,23 @@ export const RubroManufacturadoService = {
     return data;
   },
 
-  deleteRubroManufacturado: async (id: number): Promise<void> => {
-    await fetch(`${BASE_URL}/manufacturadosConRubrosYEstados/${id}`, {
-      method: "DELETE"
-  });
-}
+  deleteRubroManufacturado: async (idArticuloManufacturado: number): Promise<void> => {
+    await fetch(`${BASE_URL}/manufacturadosConRubrosYEstados/${idArticuloManufacturado}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('El rubro se eliminó correctamente');
+      } else {
+        console.error('No se pudo eliminar el rubro');
+      }
+    })
+    .catch(error => {
+      console.error('Error al realizar la solicitud DELETE', error);
+      });
+  }
 }

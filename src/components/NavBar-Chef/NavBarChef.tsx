@@ -1,11 +1,19 @@
 import { Container,  Dropdown,  Nav, Navbar } from "react-bootstrap";
-import { BoxArrowRight, Person } from "react-bootstrap-icons";
+import { Person } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
+import useIsLoggedIn from "../../hooks/useisLoggedIn";
+
 
 const NavBarChef: React.FC = () => {
   const navigate = useNavigate();
+  const isLoggedIn: boolean = useIsLoggedIn();
 
+  function onLogOut(){
+    window.localStorage.removeItem('isLoggedIn');
+    navigate('/');
+  }
 
+  //Render
   return (
     <Navbar expand="lg" bg="light">
       <Container>
@@ -29,7 +37,7 @@ const NavBarChef: React.FC = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu aria-labelledby="dropdownMenu2">
               <Dropdown.Item onClick={() => navigate('/')}>Mis datos Personales</Dropdown.Item>
-              <Dropdown.Item onClick={() => navigate('/')}>Salir <BoxArrowRight /> </Dropdown.Item>
+              {isLoggedIn && <Dropdown.Item onClick={onLogOut}>Salir </Dropdown.Item>}
             </Dropdown.Menu>
           </Dropdown>
         </Nav>

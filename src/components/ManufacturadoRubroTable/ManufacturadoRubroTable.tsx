@@ -8,10 +8,12 @@ import { ModalType } from "../../types/ModalType";
 import { EditButton } from "../EditButton/EditButton";
 import { DeleteButton } from "../DeleteButton/DeleteButton";
 import RubroManufacturadoModal from "../ManufacturadoRubroModal/ManufacturadoRubroModal";
+import { useNavigate } from 'react-router-dom';
 
 const RubroManufacturadoTable = () => {
   const [rubroManufacturados, setRubroManufacturados] = useState<DTOManufacturadoRubro[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRubroManufacturados = async () => {
@@ -80,7 +82,8 @@ const RubroManufacturadoTable = () => {
 <div className="container">
       <div className="row">
         <div className="col-3">
-          <Button variant="warning">
+          <Button onClick={() => navigate('/')} variant="warning">
+        
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className="me-2">
               <path d="M11.5998 21.6673C16.9385 21.6673 21.2664 17.3394 21.2664 12.0007C21.2664 6.6619 16.9385 2.33398 11.5998 2.33398C6.26102 2.33398 1.93311 6.6619 1.93311 12.0007C1.93311 17.3394 6.26102 21.6673 11.5998 21.6673Z" stroke="white" strokeWidth="1.45" />
               <path d="M15.4667 11.9996H7.7334M7.7334 11.9996L10.6334 9.09961M7.7334 11.9996L10.6334 14.8996" stroke="white" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" />
