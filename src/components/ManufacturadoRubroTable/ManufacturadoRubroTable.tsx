@@ -76,6 +76,7 @@ const RubroManufacturadoTable = () => {
     setShowModal(false);
   };
 
+
   return (
     <>
 
@@ -101,6 +102,7 @@ const RubroManufacturadoTable = () => {
     <div className="container">
       <div className="row">
         <div className="col-3">
+          
           <Button variant="success" className="mt-4" onClick={() => handleClick("Nuevo Producto", initializeNewRubroManufacturado(), ModalType.CREATE)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 49 49" fill="none" className="me-2">
                     <path d="M44.9167 24.5002C44.9167 28.5382 43.7193 32.4855 41.4759 35.8431C39.2325 39.2006 36.0438 41.8174 32.3131 43.3627C28.5826 44.9081 24.4774 45.3123 20.517 44.5246C16.5565 43.7367 12.9186 41.7923 10.0633 38.937C7.20797 36.0815 5.26347 32.4437 4.47569 28.4833C3.68789 24.5228 4.09223 20.4176 5.6375 16.6871C7.1828 12.9564 9.79966 9.76774 13.1572 7.52432C16.5147 5.28091 20.462 4.0835 24.5001 4.0835" stroke="white" stroke-width="3.0625" stroke-linecap="round"/>
@@ -109,11 +111,6 @@ const RubroManufacturadoTable = () => {
                   </svg>
                   Nuevo
           </Button>
-        </div>
-        <div className="col-8 mt-1 mb-0 d-flex justify-content-end align-items-center">
-          <Form className="d-flex justify-content-start align-items-center me-4">
-            <img src="src/assets/Componentes/Lupita.svg" alt="Lupa" />
-          </Form>
         </div>
       </div>
     </div>
@@ -167,6 +164,7 @@ const RubroManufacturadoTable = () => {
           rubroManufacturado={selectedRubroManufacturado}
           onDelete={handleDeleteRubroManufacturado}
           onSaveUpdate={handleUpdateRubroManufacturado}
+          
         />
       )}
     </>

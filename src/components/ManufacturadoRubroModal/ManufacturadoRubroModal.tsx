@@ -78,7 +78,7 @@ const rubroManufacturadoModal: React.FC<rubroManufacturadoModalProps> = ({
           </Modal.Header>
           <Modal.Body>
             <p>
-              ¿Está seguro que desea eliminar el Rubro de Insumo?
+              ¿Está seguro que desea eliminar el Rubro Manufactudado?
               <br /> <strong>{rubroManufacturado.denominacionArticuloManufacturado}</strong>?
             </p>
           </Modal.Body>
