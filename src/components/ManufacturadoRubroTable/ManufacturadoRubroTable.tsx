@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DTOManufacturadoRubro, EstadoAB } from "../../types/DTOManufacturadoRubro";
 import { RubroManufacturadoService } from "../../services/RubroManufacturadoService";
-import { Button, Table , Form } from "react-bootstrap";
+import { Button, Table  } from "react-bootstrap";
 import Loader from "../Loader/Loader";
 import { ModalType } from "../../types/ModalType";
 //import { PlusCircle } from "react-bootstrap-icons";
@@ -64,16 +64,24 @@ const RubroManufacturadoTable = () => {
     setShowModal(false);
   };
 
-  const handleUpdateRubroManufacturado = (updatedRubroManufacturado:DTOManufacturadoRubro) => {
+  const handleUpdateRubroManufacturado = (updatedRubroManufacturado: DTOManufacturadoRubro) => {
     try {
-      const updatedRubroManufacturados = rubroManufacturados.map((r) =>
-        r.idArticuloManufacturado === updatedRubroManufacturado.idArticuloManufacturado ? updatedRubroManufacturado : r
-      );
-      setRubroManufacturados(updatedRubroManufacturados);
+      setRubroManufacturados((prevInsumoRubro) => {
+        // Si el id es 0, significa que es un nuevo elemento
+        if (updatedRubroManufacturado.idArticuloManufacturado === 0) {
+          // Crea un nuevo array que contiene los elementos existentes y el nuevo elemento
+          return [...prevInsumoRubro, updatedRubroManufacturado];
+        } else {
+          // Si el id no es 0, actualiza el elemento existente
+          return prevInsumoRubro.map((r) =>
+            r.idArticuloManufacturado === updatedRubroManufacturado.idArticuloManufacturado ? updatedRubroManufacturado : r
+          );
+        }
+      });
+      setShowModal(false);
     } catch (error) {
       console.error(error);
     }
-    setShowModal(false);
   };
 
 
@@ -82,7 +90,7 @@ const RubroManufacturadoTable = () => {
 
 <div className="container">
       <div className="row">
-        <div className="col-3">
+        <div className="col-4">
           <Button onClick={() => navigate('/')} variant="warning">
         
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className="me-2">
@@ -93,7 +101,7 @@ const RubroManufacturadoTable = () => {
           </Button>
         </div>
         <div className=" row col-5 d-flex justify-content-center align-items-center">
-          <Button variant="warning">Articulo Manufacturados</Button>
+          <Button variant="warning">ARTICULOS MANUFACTURADOS</Button>
         </div>
       </div>
     </div>
@@ -103,7 +111,7 @@ const RubroManufacturadoTable = () => {
       <div className="row">
         <div className="col-3">
           
-          <Button variant="success" className="mt-4" onClick={() => handleClick("Nuevo Producto", initializeNewRubroManufacturado(), ModalType.CREATE)}>
+          <Button variant="success" className="mt-3" onClick={() => handleClick("Nuevo Producto", initializeNewRubroManufacturado(), ModalType.CREATE)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 49 49" fill="none" className="me-2">
                     <path d="M44.9167 24.5002C44.9167 28.5382 43.7193 32.4855 41.4759 35.8431C39.2325 39.2006 36.0438 41.8174 32.3131 43.3627C28.5826 44.9081 24.4774 45.3123 20.517 44.5246C16.5565 43.7367 12.9186 41.7923 10.0633 38.937C7.20797 36.0815 5.26347 32.4437 4.47569 28.4833C3.68789 24.5228 4.09223 20.4176 5.6375 16.6871C7.1828 12.9564 9.79966 9.76774 13.1572 7.52432C16.5147 5.28091 20.462 4.0835 24.5001 4.0835" stroke="white" stroke-width="3.0625" stroke-linecap="round"/>
                     <path d="M30.625 24.5H24.5M24.5 24.5H18.375M24.5 24.5V18.375M24.5 24.5V30.625" stroke="white" stroke-width="3.0625" stroke-linecap="round"/>
@@ -119,6 +127,8 @@ const RubroManufacturadoTable = () => {
       {isLoading ? (
         <Loader />
       ) : (
+        <div className='container'>
+         <div className='mt-3'>
         <Table hover>
           <thead>
             <tr>
@@ -153,6 +163,8 @@ const RubroManufacturadoTable = () => {
             ))}
           </tbody>
         </Table>
+        </div>
+        </div>
       )}
 
       {showModal && (

@@ -59,15 +59,14 @@ const rubroManufacturadoModal: React.FC<rubroManufacturadoModalProps> = ({
     }
   };
 
-  
-
   const formik = useFormik({
     initialValues: rubroManufacturado,
     validationSchema: validationSchema,
     validateOnChange: true,
     validateOnBlur: true,
-    onSubmit: (obj:  DTOManufacturadoRubro) => handleSaveUpdate(obj),
+    onSubmit: (obj: DTOManufacturadoRubro) => handleSaveUpdate(obj), // Asegúrate de que esté correcto
   });
+
 
   return (
     <>

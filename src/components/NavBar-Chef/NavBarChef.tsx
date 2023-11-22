@@ -36,7 +36,6 @@ const NavBarChef: React.FC = () => {
               <Person />
             </Dropdown.Toggle>
             <Dropdown.Menu aria-labelledby="dropdownMenu2">
-              <Dropdown.Item onClick={() => navigate('/')}>Mis datos Personales</Dropdown.Item>
               {isLoggedIn && <Dropdown.Item onClick={onLogOut}>Salir </Dropdown.Item>}
             </Dropdown.Menu>
           </Dropdown>
